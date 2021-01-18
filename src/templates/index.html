@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <title>OCR API</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col jumbotron">
+            <legend>OCR API</legend>
+            <form action="/process" method="post">
+                <div class="form-group">
+                    <label for="image">Image à traiter</label>
+                    <input type="file"
+                           id="image"
+                           class="form-control-file"
+                           name="image"
+                           accept="image/*">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

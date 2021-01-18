@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col jumbotron">
             <legend>OCR API</legend>
-            <form action="/process" method="post">
+            <form id="form" action="/process" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="image">Image à traiter</label>
                     <input type="file"
@@ -21,10 +21,25 @@
                            name="image"
                            accept="image/*">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" id="submit" class="btn btn-primary">Envoyer pour OCR</button>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+    document.querySelector("#submit").addEventListener("click", (e) => {
+        e.preventDefault()
+        const formData = new FormData(document.querySelector("#form"))
+        if (formData.get('image').name === "") return
+        fetch("/process", {
+            method: 'POST',
+            body: formData
+        })
+            .then(r => r.json())
+            .then(r => console.log(r))
+            .catch(error => console.error(error))
+    })
+</script>
 </body>
 </html>

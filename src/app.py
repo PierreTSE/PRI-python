@@ -21,22 +21,6 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in {'png', 'jpg', 'jpeg'}
 
 
-def convert(o):
-    if isinstance(o, np.int64) or isinstance(o, np.int32): return int(o)
-    raise TypeError
-
-
-from collections import Sequence
-
-
-def recursive_map(seq, func):
-    for item in seq:
-        if isinstance(item, Sequence):
-            yield type(item)(recursive_map(item, func))
-        else:
-            yield func(item)
-
-
 @app.route('/process', methods=['POST'])
 def process():
     # check if the post request has the file part

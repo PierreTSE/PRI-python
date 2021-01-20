@@ -5,6 +5,8 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.5/cropper.min.js"></script>
+
     <title>OCR API</title>
 </head>
 <body>
@@ -25,7 +27,40 @@
             </form>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <img id="image-viewer" alt="Image viewer" style="display: none; max-width: 100%;">
+        </div>
+    </div>
 </div>
+
+<script>
+    document.querySelector("#image").addEventListener('change', function (e) {
+        const input = this
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = document.querySelector("#image-viewer");
+                img.setAttribute('src', e.target.result)
+                img.width = document.querySelector('.col').getBoundingClientRect().width * 0.95
+                img.style.display = "block"
+                const cropper = new Cropper(img, {
+                    aspectRatio: 16 / 9,
+                    crop(event) {
+                        console.log(event.detail.x);
+                        console.log(event.detail.y);
+                        console.log(event.detail.width);
+                        console.log(event.detail.height);
+                        console.log(event.detail.rotate);
+                        console.log(event.detail.scaleX);
+                        console.log(event.detail.scaleY);
+                    },
+                });
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    })
+</script>
 
 <script>
     document.querySelector("#submit").addEventListener("click", (e) => {

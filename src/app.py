@@ -35,8 +35,8 @@ def process():
         filename = secure_filename(image.filename)
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         image.save(filepath)
-        # ocr_res = ocr(filepath)
-        ocr_res = pickle.load(open(utils.path_from_root('dump/ocr_res'), "rb"))
+        ocr_res = ocr(filepath)
+        #ocr_res = pickle.load(open(utils.path_from_root('dump/ocr_res'), "rb"))
         os.remove(filepath)
         return jsonify(format_response(ocr_res))
 

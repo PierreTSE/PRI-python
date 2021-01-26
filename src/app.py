@@ -1,14 +1,14 @@
 import os
-import pickle
-from flask import Flask, flash, request, redirect, url_for, render_template, jsonify
+
+from flask import Flask, flash, request, redirect, render_template, jsonify
 from werkzeug.utils import secure_filename
-import numpy as np
+
 from src import utils
 from src.routes.process import *
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = utils.path_from_root('uploads')
-app.config["DEBUG"] = True
+app.config["DEBUG"] = False
 
 
 @app.route('/', methods=['GET'])
@@ -36,7 +36,6 @@ def process():
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         image.save(filepath)
         ocr_res = ocr(filepath)
-        #ocr_res = pickle.load(open(utils.path_from_root('dump/ocr_res'), "rb"))
         os.remove(filepath)
         return jsonify(format_response(ocr_res))
 

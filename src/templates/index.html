@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <title>OCR API</title>
 </head>
@@ -12,16 +12,16 @@
     <div class="row">
         <div class="col jumbotron">
             <legend>OCR API</legend>
-            <form id="form" action="/process" method="post" enctype="multipart/form-data">
+            <form action="/process" enctype="multipart/form-data" id="form" method="post">
                 <div class="form-group">
                     <label for="image">Image à traiter</label>
-                    <input type="file"
-                           id="image"
+                    <input accept="image/*"
                            class="form-control-file"
+                           id="image"
                            name="image"
-                           accept="image/*">
+                           type="file">
                 </div>
-                <button type="submit" id="submit" class="btn btn-primary">Envoyer pour OCR</button>
+                <button class="btn btn-primary" id="submit" type="submit">Envoyer pour OCR</button>
             </form>
         </div>
     </div>
@@ -40,6 +40,7 @@
             .then(r => console.log(r))
             .catch(error => console.error(error))
     })
+
 </script>
 </body>
 </html>

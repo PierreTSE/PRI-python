@@ -1,8 +1,7 @@
 from collections.abc import Sequence
-from pprint import pp
+
 import easyocr
 import numpy as np
-from src import utils
 
 
 def convert(o):

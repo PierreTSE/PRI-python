@@ -1,6 +1,8 @@
 import unittest
-from src import utils
+
 from src import image_processing
+from src import utils
+
 
 class TestImage(unittest.TestCase):
     def test_reading(self):

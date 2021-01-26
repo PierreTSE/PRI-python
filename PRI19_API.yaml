@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  version: 0.1.0
+  title: PRI P19
+paths:
+  /process:
+    post:
+      summary: 'Processing endpoint: Returns details about an image OCR result'
+      operationId: processImage
+      parameters:
+        - name: image
+          in: query
+          description: The image file to process
+          required: true
+          schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: 'Processing response: Details about an image OCR result'
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                    type: object
+                    properties:
+                        file:
+                            type: string
+                            description: The name of the image
+                        ocr_res:
+                            type: array
+                            items:
+                                type: object
+                                properties:
+                                    boxes:
+                                        type: array
+                                        description: A 4-sized list of the coordinates of the bounding-box of the result     
+                                        items:
+                                            type: array
+                                            description: A 2-sized list of the abscissa and ordinate of a point
+                                            items:
+                                                type: integer
+                                                format: int32
+                                    result:
+                                        type: string
+                                        description: An OCR result
+                                    confidence:
+                                        type: number
+                                        format: double
+                                        description: The probability that the result is correct                                       
+        default:
+          description: Unexpected error
